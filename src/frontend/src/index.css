@@ -1,0 +1,121 @@
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/assets/fonts/PlayfairDisplay[wght].woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans-Variable.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Istitutional Blue palette for Chieti 2026 */
+    --background: 0.99 0 0;
+    --foreground: 0.18 0.03 258;
+
+    --card: 0.99 0 0;
+    --card-foreground: 0.18 0.03 258;
+
+    --popover: 0.99 0 0;
+    --popover-foreground: 0.18 0.03 258;
+
+    /* Primary: institutional dark blue #1B3A6B */
+    --primary: 0.32 0.1 258;
+    --primary-foreground: 0.99 0 0;
+
+    /* Secondary: medium blue */
+    --secondary: 0.94 0.02 258;
+    --secondary-foreground: 0.32 0.1 258;
+
+    /* Muted: light grey */
+    --muted: 0.97 0.005 258;
+    --muted-foreground: 0.5 0.04 258;
+
+    /* Accent: gold #C9A84C */
+    --accent: 0.74 0.1 85;
+    --accent-foreground: 0.18 0.03 258;
+
+    --destructive: 0.55 0.22 27;
+    --destructive-foreground: 0.99 0 0;
+
+    --border: 0.9 0.01 258;
+    --input: 0.9 0.01 258;
+    --ring: 0.32 0.1 258;
+
+    --radius: 6px;
+
+    /* Custom brand tokens */
+    --blue-dark: 0.32 0.1 258;
+    --blue-mid: 0.42 0.12 258;
+    --gold: 0.74 0.1 85;
+    --grey-light: 0.975 0.005 258;
+
+    --chart-1: 0.32 0.1 258;
+    --chart-2: 0.42 0.12 258;
+    --chart-3: 0.74 0.1 85;
+    --chart-4: 0.55 0.08 258;
+    --chart-5: 0.65 0.06 258;
+
+    --sidebar: 0.97 0.005 258;
+    --sidebar-foreground: 0.18 0.03 258;
+    --sidebar-primary: 0.32 0.1 258;
+    --sidebar-primary-foreground: 0.99 0 0;
+    --sidebar-accent: 0.94 0.02 258;
+    --sidebar-accent-foreground: 0.32 0.1 258;
+    --sidebar-border: 0.9 0.01 258;
+    --sidebar-ring: 0.32 0.1 258;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "General Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Playfair Display", Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .section-alt {
+    background-color: oklch(var(--grey-light));
+  }
+  .text-blue-dark {
+    color: oklch(var(--blue-dark));
+  }
+  .text-gold {
+    color: oklch(var(--gold));
+  }
+  .bg-blue-dark {
+    background-color: oklch(var(--blue-dark));
+  }
+  .bg-gold {
+    background-color: oklch(var(--gold));
+  }
+  .border-blue-dark {
+    border-color: oklch(var(--blue-dark));
+  }
+  .border-gold {
+    border-color: oklch(var(--gold));
+  }
+}
