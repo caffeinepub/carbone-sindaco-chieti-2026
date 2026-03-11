@@ -40,7 +40,8 @@
 
     /* Muted: light grey */
     --muted: 0.97 0.005 258;
-    --muted-foreground: 0.5 0.04 258;
+    /* FIX F: muted-foreground aumentato da 0.5 a 0.42 per contrasto WCAG AA */
+    --muted-foreground: 0.42 0.04 258;
 
     /* Accent: gold #C9A84C */
     --accent: 0.74 0.1 85;
@@ -79,20 +80,80 @@
 }
 
 @layer base {
+  /* FIX A: overflow-x:clip non crea scroll container, non rompe position:sticky */
+  html {
+    overflow-x: clip;
+    /* FIX L: scroll fluido ma non eccessivo */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    overflow-x: clip;
+    /* FIX D: word-break globale per evitare testi che rompono il layout */
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
   * {
     @apply border-border;
+    /* FIX E: box-sizing coerente */
+    box-sizing: border-box;
   }
+
   body {
     @apply bg-background text-foreground;
     font-family: "General Sans", system-ui, sans-serif;
+    font-size: 17px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* FIX N: stabilità visiva del testo durante il caricamento dei font */
+    font-synthesis: none;
   }
+
   h1,
   h2,
   h3,
   h4 {
     font-family: "Playfair Display", Georgia, serif;
+    /* FIX D: evita testi che spaccano il layout */
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  img {
+    /* FIX J/N: evita immagini che sbordano, riserva spazio */
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* FIX M: focus visibile da tastiera */
+  :focus-visible {
+    outline: 2px solid oklch(var(--blue-dark));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* FIX L: compensazione header sticky per tutte le sezioni con id */
+  /* Header: h-16 (64px) mobile, h-20 (80px) desktop */
+  section[id],
+  [id="come-funziona"],
+  [id="candidato"],
+  [id="programma"],
+  [id="liste"],
+  [id="faq"] {
+    scroll-margin-top: 4.5rem; /* 72px – safe default */
+  }
+
+  @media (min-width: 1024px) {
+    section[id],
+    [id="come-funziona"],
+    [id="candidato"],
+    [id="programma"],
+    [id="liste"],
+    [id="faq"] {
+      scroll-margin-top: 5.5rem; /* 88px */
+    }
   }
 }
 
@@ -117,5 +178,15 @@
   }
   .border-gold {
     border-color: oklch(var(--gold));
+  }
+  /* FIX B: helper per font fluido hero */
+  .text-hero {
+    font-size: clamp(1.75rem, 4vw + 0.5rem, 3.75rem);
+    line-height: 1.15;
+  }
+  /* FIX H: scala tipografica consistente per H2 */
+  .text-section-title {
+    font-size: clamp(1.5rem, 3vw + 0.5rem, 3rem);
+    line-height: 1.2;
   }
 }
